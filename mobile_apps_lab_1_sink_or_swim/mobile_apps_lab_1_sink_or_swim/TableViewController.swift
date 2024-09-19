@@ -24,29 +24,51 @@ class TableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if(self.movieModel.movieNames.count > 10) {
-            return 10
-        }
         
-        return self.movieModel.movieNames.count
+        if section == 1 {
+            if(self.movieModel.movieNames.count > 10) {
+                return 10
+            }
+            return self.movieModel.movieNames.count
+        }else{
+            return 1
+        }
         
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieNameCell", for: indexPath)
-
-        // Configure the cell...
-        if let name = self.movieModel.movieNames[indexPath.row] as? String{
-            cell.textLabel!.text = name
-        }
         
-        return cell
+        if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MovieNameCell", for: indexPath)
+            // Configure the cell...
+            if let name = self.movieModel.movieNames[indexPath.row] as? String{
+                cell.textLabel!.text = name
+            }
+            
+            return cell
+        }else if indexPath.section == 0{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MovieSearchCell", for: indexPath)
+            // Configure the cell...
+            cell.textLabel?.text = "Movie Search"
+            cell.detailTextLabel?.text = "TODO: # of movies"
+            cell.backgroundColor = UIColor.lightGray
+            
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CreditsCell", for: indexPath)
+            // Configure the cell...
+            cell.textLabel?.text = "Roll Credits"
+            cell.detailTextLabel?.text = "4"
+            cell.backgroundColor = UIColor.darkGray
+            
+            return cell
+        }
     }
 
     

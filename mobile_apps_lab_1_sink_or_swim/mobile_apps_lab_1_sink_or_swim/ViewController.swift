@@ -26,5 +26,8 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func enterSettings(_ sender: Any) {
+        
+    }
 }
 
