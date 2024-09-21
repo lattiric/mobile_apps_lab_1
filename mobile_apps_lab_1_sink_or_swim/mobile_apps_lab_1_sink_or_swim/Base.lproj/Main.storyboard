@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Bwj-24-63b">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Bwj-24-63b">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -327,9 +327,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6B9-dz-zXt">
-                                <rect key="frame" x="21" y="723" width="350" height="95"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6B9-dz-zXt">
+                                <rect key="frame" x="97.000000000000014" y="723" width="199.33333333333337" height="95"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Enter App">
                                     <backgroundConfiguration key="background">
@@ -343,9 +342,8 @@
                                     <segue destination="3YM-KO-N6p" kind="show" id="2UM-Yf-I95"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4gH-Qb-D7X">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4gH-Qb-D7X">
                                 <rect key="frame" x="21" y="151" width="350" height="531"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YRa-Xa-BXa">
                                 <rect key="frame" x="273" y="103" width="104" height="40"/>
@@ -366,6 +364,12 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LQr-bN-OiG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6B9-dz-zXt" firstAttribute="top" secondItem="4gH-Qb-D7X" secondAttribute="bottom" constant="41" id="Grm-2S-KM9"/>
+                            <constraint firstItem="4gH-Qb-D7X" firstAttribute="centerX" secondItem="LQr-bN-OiG" secondAttribute="centerX" id="eas-uO-nLP"/>
+                            <constraint firstItem="6B9-dz-zXt" firstAttribute="centerX" secondItem="LQr-bN-OiG" secondAttribute="centerX" id="gl4-If-2TH"/>
+                            <constraint firstItem="4gH-Qb-D7X" firstAttribute="centerY" secondItem="LQr-bN-OiG" secondAttribute="centerY" id="gyc-ye-tpd"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bGj-bS-go0"/>
                     <connections>
