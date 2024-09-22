@@ -9,6 +9,7 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var ligthDarkMode: UISegmentedControl!
     override func viewDidLoad() {
         super.viewDidLoad()
 
