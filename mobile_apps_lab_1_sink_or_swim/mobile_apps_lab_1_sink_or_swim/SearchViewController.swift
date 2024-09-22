@@ -1,4 +1,3 @@
-//
 //  SearchViewController.swift
 //  Movie App Bare Bones
 //
@@ -8,39 +7,68 @@
 import UIKit
 import SafariServices //to link the website when u click on a movie
 
-//WHAT WE NEED:
-//UI
-//Network Request
-//Need a way to tap a cell to see info about the movie
-//custom cell to show the movie
-
-class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource{
+class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource{
 
     @IBOutlet var table: UITableView!
     @IBOutlet var field: UITextField!
+    @IBOutlet var yearPicker: UIPickerView!
     
     //array of movie objects
     var movies = [Movie]()
+    var allMovies = [Movie]() // store all movies to reset after filtering
+    
+    var years = ["All", "Before 2000", "2000-2010", "2010-2020", "2020-2024"] // years for the picker
+    var selectedYear: String = "All" // store selected year
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //register custom cell
         table.register(MovieTableViewCell.nib(), forCellReuseIdentifier: MovieTableViewCell.identifier)
         table.delegate = self
         table.dataSource = self
         field.delegate = self
         
+        //set up picker
+        yearPicker.delegate = self
+        yearPicker.dataSource = self
+        
+        //hide when it first opens, show when search is made
+        yearPicker.isHidden = true
+        
         //load up keyboard as soon as it opens
         field.becomeFirstResponder()
     }
     
-    //Field
+    //MARK: picker view methods
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1;      //only picking from one component
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return years.count // number of year options
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return years[row] // return the year string for each row
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedYear = years[row] // update selected year based on one user picks
+        filterMovies() // re-filter movies when a new year is selected
+    }
+
+    //MARK: Text Field Methods
     //function to search for a movie
     //capture when user hits return
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        searchMovies();
+        searchMovies()    //search for movies when user hits return 
         return true;
     }
+    
     func searchMovies() {
         field.resignFirstResponder()
         
@@ -48,8 +76,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
             return
         }
         
-        // Clear previous search results
-        movies.removeAll()
+        // clear previous search results
+        //movies.removeAll()
         
         //encode the search query to be safe for use in the URL (replaces spaces and special characters)
         let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
@@ -66,25 +94,26 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
                 return
             }
             
-            
-            
-            //TESTING
+//            //TESTING
 //            if let jsonString = String(data: data, encoding: .utf8) {
-//                        print("JSON Response: \(jsonString)")
-//                    }
+//                print("JSON Response: \(jsonString)")
+//            }
             
             // Convert data to MovieResult struct
             do {
                 let result = try JSONDecoder().decode(MovieResult.self, from: data)
+                self.allMovies = result.Search
                 self.movies = result.Search
                 
                 //testing
                 for movie in self.movies {
                     print("Movie Title: \(movie.Title)")
-                    }
+                }
                 
                 // Reload the table on the main thread
                 DispatchQueue.main.async {
+                    self.yearPicker.isHidden = false
+                    self.filterMovies()
                     self.table.reloadData()
                 }
             } catch {
@@ -93,7 +122,73 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
             
         }.resume()
     }
-    
+
+    //function for filtering movies based on picker selection
+    func filterMovies() {
+        self.movies = self.allMovies
+        
+        print("Selected Year: \(selectedYear)")
+        
+        let yearRegex = try! NSRegularExpression(pattern: "\\d{4}", options: [])
+            
+            // Helper function to extract the year from the movie's Year string
+            func extractYear(from yearString: String) -> Int? {
+                let trimmedString = yearString.trimmingCharacters(in: .whitespacesAndNewlines)
+                let matches = yearRegex.matches(in: trimmedString, options: [], range: NSRange(location: 0, length: trimmedString.count))
+                if let match = matches.first {
+                    let yearRange = Range(match.range, in: trimmedString)
+                    if let yearRange = yearRange, let year = Int(trimmedString[yearRange]) {
+                        return year
+                    }
+                }
+                return nil
+            }
+
+            // Create a filtered list based on the selected year
+            if selectedYear == "All" {
+                table.reloadData()  // Show all movies
+            } else if selectedYear == "Before 2000" {
+                let filteredMovies = movies.filter { movie in
+                    if let year = extractYear(from: movie.Year), year < 2000 {
+                        return true
+                    }
+                    return false
+                }
+                self.movies = filteredMovies
+                print("Filtered Movies: \(filteredMovies.map { $0.Title })") // Show filtered titles
+                table.reloadData()  // Refresh table with filtered movies
+            } else if selectedYear == "2000-2010" {
+                let filteredMovies = movies.filter { movie in
+                    if let year = extractYear(from: movie.Year), year >= 2000 && year <= 2010 {
+                        return true
+                    }
+                    return false
+                }
+                self.movies = filteredMovies
+                print("Filtered Movies: \(filteredMovies.map { $0.Title })") // Show filtered titles
+                table.reloadData()  // Refresh table with filtered movies
+            } else if selectedYear == "2010-2020" {
+                let filteredMovies = movies.filter { movie in
+                    if let year = extractYear(from: movie.Year), year > 2010 && year <= 2020 {
+                        return true
+                    }
+                    return false
+                }
+                self.movies = filteredMovies
+                print("Filtered Movies: \(filteredMovies.map { $0.Title })") // Show filtered titles
+                table.reloadData()  // Refresh table with filtered movies
+            } else if selectedYear == "2020-2024" {
+                let filteredMovies = movies.filter { movie in
+                    if let year = extractYear(from: movie.Year), year >= 2020 && year <= 2024 {
+                        return true
+                    }
+                    return false
+                }
+                self.movies = filteredMovies
+                print("Filtered Movies: \(filteredMovies.map { $0.Title })") // Show filtered titles
+                table.reloadData()  // Refresh table with filtered movies
+            }
+    }
     
     //Table
     //function for num rows
@@ -114,11 +209,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
         let url = "https://www.imdb.com/title/\(movies[indexPath.row].imdbID)/"
         let vc = SFSafariViewController(url: URL(string:url)!)
         present(vc, animated: true)
-        
     }
 
 }
-struct MovieResult: Codable{
+
+struct MovieResult: Codable {
     let Search: [Movie]
 }
 
@@ -132,7 +227,4 @@ struct Movie: Codable {  //what its looking for in the json
     private enum CodingKeys: String, CodingKey {
         case Title, Year, imdbID, _Type = "Type", Poster
     }
-
 }
-
-
