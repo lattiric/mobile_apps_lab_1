@@ -23,6 +23,8 @@
 		58F9276B2C991CEB0048EF37 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 58F9276A2C991CEB0048EF37 /* Base */; };
 		58F9276D2C991CED0048EF37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58F9276C2C991CED0048EF37 /* Assets.xcassets */; };
 		58F927702C991CED0048EF37 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 58F9276F2C991CED0048EF37 /* Base */; };
+		EF38368A2CA0DE1C00EEDF78 /* MoviePosterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF3836892CA0DE1C00EEDF78 /* MoviePosterCell.xib */; };
+		EF38368B2CA0DE1C00EEDF78 /* MoviePosterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3836882CA0DE1C00EEDF78 /* MoviePosterCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		58F9276C2C991CED0048EF37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58F9276F2C991CED0048EF37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		58F927712C991CED0048EF37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF3836882CA0DE1C00EEDF78 /* MoviePosterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePosterCell.swift; sourceTree = "<group>"; };
+		EF3836892CA0DE1C00EEDF78 /* MoviePosterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviePosterCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,8 @@
 				58C5E2492C9BD89A00BFE0EF /* MovieModel.h */,
 				58C5E24A2C9BD89A00BFE0EF /* MovieModel.m */,
 				586D80982C9D032E0003C9C9 /* MovieTableViewCell.swift */,
+				EF3836882CA0DE1C00EEDF78 /* MoviePosterCell.swift */,
+				EF3836892CA0DE1C00EEDF78 /* MoviePosterCell.xib */,
 				58F927692C991CEB0048EF37 /* Main.storyboard */,
 				58F9276C2C991CED0048EF37 /* Assets.xcassets */,
 				58F9276E2C991CED0048EF37 /* LaunchScreen.storyboard */,
@@ -163,6 +169,7 @@
 				58F9276D2C991CED0048EF37 /* Assets.xcassets in Resources */,
 				58F927702C991CED0048EF37 /* Base in Resources */,
 				586D809B2C9D054B0003C9C9 /* MovieTableViewCell.xib in Resources */,
+				EF38368A2CA0DE1C00EEDF78 /* MoviePosterCell.xib in Resources */,
 				58F9276B2C991CEB0048EF37 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,6 +184,7 @@
 				58F927682C991CEB0048EF37 /* ViewController.swift in Sources */,
 				586D80972C9D00FF0003C9C9 /* SearchViewController.swift in Sources */,
 				586D80992C9D032E0003C9C9 /* MovieTableViewCell.swift in Sources */,
+				EF38368B2CA0DE1C00EEDF78 /* MoviePosterCell.swift in Sources */,
 				58C5E24D2C9BE85200BFE0EF /* MenuViewController.swift in Sources */,
 				58F927642C991CEB0048EF37 /* AppDelegate.swift in Sources */,
 				586D80952C9CF56A0003C9C9 /* SettingsViewController.swift in Sources */,
