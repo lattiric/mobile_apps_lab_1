@@ -23,10 +23,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qy5-Mm-KQG">
-                                <rect key="frame" x="16" y="103" width="361" height="247"/>
+                                <rect key="frame" x="16" y="103" width="362" height="247"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Page 1">
+                                <buttonConfiguration key="configuration" style="plain" title="Movie List + Search">
                                     <backgroundConfiguration key="background">
                                         <color key="strokeColor" systemColor="systemYellowColor"/>
                                     </backgroundConfiguration>
@@ -42,7 +42,7 @@
                                 <rect key="frame" x="16" y="605" width="361" height="213"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Page 3">
+                                <buttonConfiguration key="configuration" style="plain" title="Kitchen Sink">
                                     <backgroundConfiguration key="background">
                                         <color key="strokeColor" systemColor="systemYellowColor"/>
                                     </backgroundConfiguration>
@@ -58,7 +58,7 @@
                                 <rect key="frame" x="16" y="358" width="361" height="239"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Page 2">
+                                <buttonConfiguration key="configuration" style="plain" title="Now Playing">
                                     <backgroundConfiguration key="background">
                                         <color key="strokeColor" systemColor="systemYellowColor"/>
                                     </backgroundConfiguration>
