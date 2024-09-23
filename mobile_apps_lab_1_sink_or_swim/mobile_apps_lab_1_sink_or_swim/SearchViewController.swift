@@ -13,6 +13,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
     @IBOutlet var field: UITextField!
     @IBOutlet var yearPicker: UIPickerView!
     
+    @IBOutlet weak var noResultsFound: UILabel!
     //array of movie objects
     var movies = [Movie]()
     var allMovies = [Movie]() // store all movies to reset after filtering
@@ -23,6 +24,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        noResultsFound.isHidden = true
         
         //register custom cell
         table.register(MovieTableViewCell.nib(), forCellReuseIdentifier: MovieTableViewCell.identifier)
@@ -71,6 +74,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
     func searchMovies() {
         field.resignFirstResponder()
         
+            movies.removeAll()
+            noResultsFound.isHidden = true
+        
         guard let text = field.text, !text.isEmpty else {
             return
         }
@@ -107,8 +113,13 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
                     self.yearPicker.isHidden = false
                     self.filterMovies()
                     self.table.reloadData()
+                    self.noResultsFound.isHidden = !self.movies.isEmpty
                 }
             } catch {
+                DispatchQueue.main.async {
+                    self.table.reloadData()
+                    self.noResultsFound.isHidden = !self.movies.isEmpty
+                }
                 print("Decoding error")
             }
             
@@ -177,6 +188,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
                 self.movies = filteredMovies
                 table.reloadData()  //new table
             }
+        self.noResultsFound.isHidden = !self.movies.isEmpty
     }
     
     //table view for movies (cells for movies)
