@@ -14,13 +14,16 @@ class Page3ViewController: UIViewController {
     @IBOutlet weak var slider: UISlider!
     
     @IBOutlet weak var timerBTN: UIButton!
+    
+    @IBOutlet weak var stopTimer: UIButton!
+    
     var timer: Timer!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
                 
-        
+        stopTimer.addTarget(self, action: #selector(self.stopButtonClicked(_:)), for: UIControl.Event.touchUpInside)
         
             
         timerBTN.addTarget(self, action: #selector(self.buttonClicked(_:)), for: UIControl.Event.touchUpInside)
@@ -47,6 +50,11 @@ class Page3ViewController: UIViewController {
         }
         timer.fire()
     }
+    
+    @IBAction func stopButtonClicked(_ sender: Any){
+        
+        timer.invalidate()
+    }
         
         @IBAction func valueChanged(_ sender: Any) {
             print("HERE!!!")
@@ -57,12 +65,12 @@ class Page3ViewController: UIViewController {
                 print("Switch is off")
                 self.view.backgroundColor = UIColor.black
             }
-            timer.invalidate()
+            //timer.invalidate()
             
         }
         
         @IBAction func sliderValueChanged(_ sender: Any) {
-            timer.invalidate()
+            //timer.invalidate()
             print("Slider value: \(slider.value)")
             if (slider.value > 0 && slider.value <= 0.1) {
                 self.view.backgroundColor = UIColor.white
