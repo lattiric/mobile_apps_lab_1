@@ -10,17 +10,36 @@ import UIKit
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var ligthDarkMode: UISegmentedControl!
+    
+    lazy var lightDarkModel:LightDarkModel = {
+        return LightDarkModel.sharedInstance()
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        view.backgroundColor = UIColor.gray
+        lazy var isLightOrDark = lightDarkModel.getLightOrDark();
+        if(isLightOrDark == 0){
+            view.backgroundColor = UIColor.gray
+        }else{
+            view.backgroundColor = UIColor.white
+        }
+        
     }
     
 
     @IBAction func closeSettings(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+//    @IBAction func setDark(_ sender: Any) {
+//        lightDarkModel.setLightOrDark(0);
+//    }
+    
+//    @IBAction func setLight(_ sender: Any) {
+//        lightDarkModel.setLightOrDark(1);
+//    }
     /*
     // MARK: - Navigation
 

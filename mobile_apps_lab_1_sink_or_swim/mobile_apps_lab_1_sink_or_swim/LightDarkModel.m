@@ -27,5 +27,14 @@
     return _lightOrDark;
 }
 
+-(NSInteger)getLightOrDark{
+    return _lightOrDark;
+}
+
+-(void)setLightOrDark:(NSInteger)num{
+    _lightOrDark = num;
+}
+
+
 
 @end

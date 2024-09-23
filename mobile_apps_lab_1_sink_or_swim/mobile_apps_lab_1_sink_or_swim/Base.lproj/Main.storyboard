@@ -463,6 +463,10 @@
                                     <segment title="Dark"/>
                                     <segment title="Light"/>
                                 </segments>
+                                <connections>
+                                    <action selector="setDark:" destination="xQB-nt-IRo" eventType="valueChanged" id="z9Y-Ml-Rba"/>
+                                    <action selector="setLight:" destination="xQB-nt-IRo" eventType="valueChanged" id="lRR-tA-7NK"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="There are no settings dumb dumb" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNG-gp-XJ5">
                                 <rect key="frame" x="16" y="159" width="361" height="21"/>

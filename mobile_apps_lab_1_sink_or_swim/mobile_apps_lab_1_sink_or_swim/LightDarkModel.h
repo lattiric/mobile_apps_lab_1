@@ -13,7 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(LightDarkModel*)sharedInstance;
 
-@property(strong, nonatomic) NSInteger* lightOrDark;
+-(NSInteger)getLightOrDark;
+-(void)setLightOrDark:(NSInteger)num;
+
+@property(nonatomic) NSInteger* lightOrDark;
 
 @end
 
