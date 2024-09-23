@@ -42,7 +42,7 @@ class ViewController: UIViewController{
 extension ViewController: SettingsDelegate {
     func didChangeSettings(newText: String){
 //        settingsButton.setTitle(newText, for: .normal)
-//        print("reached")
+        print("reached")
         fakeSettings.setTitle("Testing", for: .normal)
 
     }

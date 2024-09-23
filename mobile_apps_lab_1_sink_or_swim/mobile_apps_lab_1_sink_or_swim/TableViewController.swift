@@ -59,6 +59,11 @@ class TableViewController: UITableViewController {
             cell.detailTextLabel?.text = "TODO: # of movies"
             cell.backgroundColor = UIColor.lightGray
             
+            cell.textLabel?.layer.borderColor = UIColor.gray.cgColor
+                cell.textLabel?.layer.borderWidth = 1
+                cell.textLabel?.layer.cornerRadius = 5
+                cell.textLabel?.layer.masksToBounds = true
+            
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "CreditsCell", for: indexPath)
