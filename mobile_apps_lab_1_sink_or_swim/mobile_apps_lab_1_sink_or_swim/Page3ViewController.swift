@@ -65,12 +65,12 @@ class Page3ViewController: UIViewController {
                 print("Switch is off")
                 self.view.backgroundColor = UIColor.black
             }
-            timer.invalidate()
+            //timer.invalidate()
             
         }
         
         @IBAction func sliderValueChanged(_ sender: Any) {
-            timer.invalidate()
+            //timer.invalidate()
             print("Slider value: \(slider.value)")
             if (slider.value > 0 && slider.value <= 0.1) {
                 self.view.backgroundColor = UIColor.white
