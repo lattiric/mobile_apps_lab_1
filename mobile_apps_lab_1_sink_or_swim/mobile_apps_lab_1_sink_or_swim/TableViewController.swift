@@ -56,7 +56,7 @@ class TableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MovieSearchCell", for: indexPath)
             // Configure the cell...
             cell.textLabel?.text = "Movie Search"
-            cell.detailTextLabel?.text = "TODO: # of movies"
+            cell.detailTextLabel?.text = "Press to Search->"
             cell.backgroundColor = UIColor.lightGray
             
             cell.textLabel?.layer.borderColor = UIColor.gray.cgColor

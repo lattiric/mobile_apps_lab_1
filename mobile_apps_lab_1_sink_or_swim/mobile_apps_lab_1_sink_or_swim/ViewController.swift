@@ -43,7 +43,7 @@ extension ViewController: SettingsDelegate {
     func didChangeSettings(newText: String){
 //        settingsButton.setTitle(newText, for: .normal)
         print("reached")
-        fakeSettings.setTitle("Testing", for: .normal)
+        fakeSettings.setTitle(newText, for: .normal)
 
     }
 }

@@ -17,7 +17,9 @@ class ModalSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        delegate?.didChangeSettings(newText: "Settings Again?")        // Do any additional setup after loading the view.
+        delegate?.didChangeSettings(newText: "Pranked!")        // Do any additional setup after loading the view.
+        
+        view.backgroundColor = UIColor.gray
         
         let closeSettings = UIButton()
         closeSettings.setTitle("Done", for: .normal)
