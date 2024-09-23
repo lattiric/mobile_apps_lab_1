@@ -45,4 +45,9 @@ class MoviePosterCell: UICollectionViewCell {
         }
         task.resume() // Start the data task
     }
+    
+    static func nib() -> UINib
+    {
+        return UINib(nibName: "MoviePosterCell", bundle: nil)
+    }
 }

@@ -11,6 +11,10 @@ protocol SettingsDelegate: AnyObject {
     func didChangeSettings(newText: String);
 }
 
+//extension UIViewController: SettingsDelegate {
+//    
+//}
+
 class SettingsViewController: UIViewController {
 
     var delegate: SettingsDelegate?
@@ -36,6 +40,8 @@ class SettingsViewController: UIViewController {
     
 
     @IBAction func closeSettings(_ sender: Any) {
+        print("reached test")
+        delegate?.didChangeSettings(newText: "Settings Again?")
         dismiss(animated: true, completion: nil)
     }
     

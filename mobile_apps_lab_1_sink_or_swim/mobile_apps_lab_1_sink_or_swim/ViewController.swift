@@ -7,11 +7,12 @@
 
 import UIKit
 
-class ViewController: UIViewController, SettingsDelegate {
-
+class ViewController: UIViewController{
     
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var logoView: UIImageView!
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,23 +20,26 @@ class ViewController: UIViewController, SettingsDelegate {
         view.backgroundColor = UIColor.darkGray;
     
         self.logoView.image = UIImage.init(named: "logo")
-        
-        let destinationVC = SettingsViewController()
-        destinationVC.delegate = self
     }
 
-    func didChangeSettings(newText: String){
-//        settingsButton.setTitle(newText, for: .normal)
-        settingsButton.setTitle("Testing", for: .normal)
-
-    }
+    
     
     @IBAction func enterApp(_ sender: Any) {
         
     }
     
     @IBAction func enterSettings(_ sender: Any) {
-        
+        let destinationVC = SettingsViewController()
+        destinationVC.delegate = self
+//        present(destinationVC, animated: true, completion: nil)
     }
 }
 
+extension ViewController: SettingsDelegate {
+    func didChangeSettings(newText: String){
+//        settingsButton.setTitle(newText, for: .normal)
+        print("reached")
+        settingsButton.setTitle("Testing", for: .normal)
+
+    }
+}

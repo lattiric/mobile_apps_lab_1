@@ -13,9 +13,9 @@ class Page2ViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var numberOfMoviesLabel: UILabel!
+    @IBOutlet var numberOfMoviesLabel: UILabel!
     
-    @IBOutlet weak var stepper: UIStepper!
+    @IBOutlet var stepper: UIStepper!
     
     
     //array stores movies from TMDb API
@@ -25,19 +25,21 @@ class Page2ViewController: UIViewController, UICollectionViewDataSource, UIColle
     let apiKey = "c300d8252dfb6ad8789efb1c1abc86c7"
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return min(movies.count, 10)
+        //return min(movies.count, 10)
+        return min(movies.count, Int(stepper.value))
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviePosterCell", for: indexPath) as! MoviePosterCell
-            let movie = movies[indexPath.row]
-            
-            // Configure the cell with the movie's poster path
-            cell.configure(with: movie.posterPath)
-            
-            return cell
+        let movie = movies[indexPath.row]
+        
+        // Configure the cell with the movie's poster path
+        cell.configure(with: movie.posterPath)
+        //cell.configure(with: (movie.posterPath)!)
+        
+        return cell
     }
     
     struct MovieResponse: Codable
@@ -48,43 +50,47 @@ class Page2ViewController: UIViewController, UICollectionViewDataSource, UIColle
     struct Movie: Codable
     {
         let title: String?
-            let posterPath: String?
-            let id: Int?
-            let overview: String?
-            let releaseDate: String?
-            
-            // Use CodingKeys to map the JSON fields to your struct properties
-            enum CodingKeys: String, CodingKey {
-                case title
-                case posterPath = "poster_path"
-                case id
-                case overview
-                case releaseDate = "release_date"
-            }
+        let posterPath: String?
+        let id: Int?
+        let overview: String?
+        let releaseDate: String?
+        
+        // Use CodingKeys to map the JSON fields to your struct properties
+        enum CodingKeys: String, CodingKey {
+            case title
+            case posterPath = "poster_path"
+            case id
+            case overview
+            case releaseDate = "release_date"
+        }
     }
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = UIColor.darkGray;
         
         stepper.minimumValue = 1
         stepper.maximumValue = 10
-        stepper.value = 1 // Start with showing one movie
-
+        //stepper.value = 1
+        stepper.stepValue = 1.0 // Start with showing one movie
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width:120, height:300)
+        collectionView.collectionViewLayout = layout
+        
         // Initialize the label to reflect the starting number of movies
         numberOfMoviesLabel.text = "\(Int(stepper.value))"
-//        collectionView.dataSource = self
-//        collectionView.delegate = self
-//        
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
         collectionView.register(UINib(nibName: "MoviePosterCell", bundle: nil), forCellWithReuseIdentifier: "MoviePosterCell")
-//        
-//        retrieveNowPlaying()
+        
         Task{
             do{
                 let nowPlayingMovies = try await retrieveNowPlaying()
-            
+                
                 DispatchQueue.main.async {
                     self.movies = nowPlayingMovies
                     self.collectionView.reloadData()
@@ -98,27 +104,27 @@ class Page2ViewController: UIViewController, UICollectionViewDataSource, UIColle
     func retrieveNowPlaying() async throws -> [Movie]
     {
         guard let nowPlayingURL = URL(string: "https://api.themoviedb.org/3/movie/now_playing") else {
-                throw URLError(.badURL)
-            }
+            throw URLError(.badURL)
+        }
         
         guard var components = URLComponents(url: nowPlayingURL, resolvingAgainstBaseURL: true) else {
-                throw URLError(.badURL)
-            }
+            throw URLError(.badURL)
+        }
         
         let queryItems: [URLQueryItem] = [
-          URLQueryItem(name: "language", value: "en-US"),
-          URLQueryItem(name: "page", value: "1"),
+            URLQueryItem(name: "language", value: "en-US"),
+            URLQueryItem(name: "page", value: "1"),
         ]
         components.queryItems = components.queryItems.map { $0 + queryItems } ?? queryItems
-
+        
         var request = URLRequest(url: components.url!)
         request.httpMethod = "GET"
         request.timeoutInterval = 10
         request.allHTTPHeaderFields = [
-          "accept": "application/json",
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMzAwZDgyNTJkZmI2YWQ4Nzg5ZWZiMWMxYWJjODZjNyIsIm5iZiI6MTcyNzAzODYyMi42MTMxNTIsInN1YiI6IjY2ZWY0MDQ0NGE3ZjBiMThiMDI2MjNlMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.foKTJBnOyutnntMu38h9y8hORJmZhsNhPo4AZe-OCHM"
+            "accept": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMzAwZDgyNTJkZmI2YWQ4Nzg5ZWZiMWMxYWJjODZjNyIsIm5iZiI6MTcyNzAzODYyMi42MTMxNTIsInN1YiI6IjY2ZWY0MDQ0NGE3ZjBiMThiMDI2MjNlMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.foKTJBnOyutnntMu38h9y8hORJmZhsNhPo4AZe-OCHM"
         ]
-
+        
         let (data, _) = try await URLSession.shared.data(for: request)
         
         let movieResponse = try JSONDecoder().decode(MovieResponse.self, from:data)
@@ -129,17 +135,39 @@ class Page2ViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
+        //numberOfMoviesLabel.text = Int(sender.value).description
         let numberOfMovies = Int(sender.value)
         
         // Update the label with the current number of movies to display
         numberOfMoviesLabel.text = "\(numberOfMovies)"
         
         // Optionally, slice the movies array based on this value
+        //_ = Array(movies.prefix(min(numberOfMovies, 10)))
         let displayedMovies = Array(movies.prefix(min(numberOfMovies, 10)))
         
         // Reload the collection view with the updated data
+        
         collectionView.reloadData()
     }
+}
+    //    @IBAction func stepperValueChanged(_ sender: UIStepper) {
+//        
+//        numberOfMoviesLabel.text = Int(sender.value).description
+//        let numberOfMovies = Int(sender.value)
+//        
+//        // Update the label with the current number of movies to display
+//        numberOfMoviesLabel.text = "\(numberOfMovies)"
+//        
+//        // Optionally, slice the movies array based on this value
+//        //_ = Array(movies.prefix(min(numberOfMovies, 10)))
+//        let displayedMovies = Array(movies.prefix(min(numberOfMovies, 10)))
+//        
+//        // Reload the collection view with the updated data
+//        
+//        collectionView.reloadData()
+  //  }
+    
+
     
     
 //        let nowPlayingURL = "https://api.themoviedb.org/3/movie/now_playing"
@@ -197,7 +225,7 @@ class Page2ViewController: UIViewController, UICollectionViewDataSource, UIColle
     //            }
     //
     //            return cell
-}
+
 
 
 

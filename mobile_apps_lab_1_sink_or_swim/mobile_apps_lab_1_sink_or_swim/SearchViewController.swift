@@ -41,8 +41,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
         field.becomeFirstResponder()
     }
     
-    //MARK: picker view methods
-    
+    //picker view methods (pick the year)
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1;      //only picking from one component
     }
@@ -60,7 +59,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
         filterMovies() // re-filter movies when a new year is selected
     }
 
-    //MARK: Text Field Methods
+    //text field methods (search bar)
     //function to search for a movie
     //capture when user hits return
     
@@ -76,16 +75,13 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
             return
         }
         
-        // clear previous search results
-        //movies.removeAll()
-        
         //encode the search query to be safe for use in the URL (replaces spaces and special characters)
         let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         let urlString = "https://www.omdbapi.com/?apikey=47aeeead&s=\(query)"
         
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
-            return
+            return   //set url to string
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -93,13 +89,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
                 print("Error or no data")
                 return
             }
+        
             
-//            //TESTING
-//            if let jsonString = String(data: data, encoding: .utf8) {
-//                print("JSON Response: \(jsonString)")
-//            }
-            
-            // Convert data to MovieResult struct
+            // convert data to MovieResult struct
             do {
                 let result = try JSONDecoder().decode(MovieResult.self, from: data)
                 self.allMovies = result.Search
@@ -110,7 +102,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
                     print("Movie Title: \(movie.Title)")
                 }
                 
-                // Reload the table on the main thread
+                // reload the table on the main thread
                 DispatchQueue.main.async {
                     self.yearPicker.isHidden = false
                     self.filterMovies()
@@ -129,9 +121,10 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
         
         print("Selected Year: \(selectedYear)")
         
+        //some formatting is off in json, assure its a 4 dig number
         let yearRegex = try! NSRegularExpression(pattern: "\\d{4}", options: [])
             
-            // Helper function to extract the year from the movie's Year string
+            // function to extract the year from the movie's Year string
             func extractYear(from yearString: String) -> Int? {
                 let trimmedString = yearString.trimmingCharacters(in: .whitespacesAndNewlines)
                 let matches = yearRegex.matches(in: trimmedString, options: [], range: NSRange(location: 0, length: trimmedString.count))
@@ -144,9 +137,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
                 return nil
             }
 
-            // Create a filtered list based on the selected year
+            //filter based on picker
             if selectedYear == "All" {
-                table.reloadData()  // Show all movies
+                table.reloadData()  // show all movies
             } else if selectedYear == "Before 2000" {
                 let filteredMovies = movies.filter { movie in
                     if let year = extractYear(from: movie.Year), year < 2000 {
@@ -155,8 +148,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
                     return false
                 }
                 self.movies = filteredMovies
-                print("Filtered Movies: \(filteredMovies.map { $0.Title })") // Show filtered titles
-                table.reloadData()  // Refresh table with filtered movies
+                table.reloadData()  //new table with filtered movies
             } else if selectedYear == "2000-2010" {
                 let filteredMovies = movies.filter { movie in
                     if let year = extractYear(from: movie.Year), year >= 2000 && year <= 2010 {
@@ -165,8 +157,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
                     return false
                 }
                 self.movies = filteredMovies
-                print("Filtered Movies: \(filteredMovies.map { $0.Title })") // Show filtered titles
-                table.reloadData()  // Refresh table with filtered movies
+                table.reloadData()  // new table
             } else if selectedYear == "2010-2020" {
                 let filteredMovies = movies.filter { movie in
                     if let year = extractYear(from: movie.Year), year > 2010 && year <= 2020 {
@@ -175,8 +166,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
                     return false
                 }
                 self.movies = filteredMovies
-                print("Filtered Movies: \(filteredMovies.map { $0.Title })") // Show filtered titles
-                table.reloadData()  // Refresh table with filtered movies
+                table.reloadData()  // new table
             } else if selectedYear == "2020-2024" {
                 let filteredMovies = movies.filter { movie in
                     if let year = extractYear(from: movie.Year), year >= 2020 && year <= 2024 {
@@ -185,12 +175,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
                     return false
                 }
                 self.movies = filteredMovies
-                print("Filtered Movies: \(filteredMovies.map { $0.Title })") // Show filtered titles
-                table.reloadData()  // Refresh table with filtered movies
+                table.reloadData()  //new table
             }
     }
     
-    //Table
+    //table view for movies (cells for movies)
     //function for num rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
