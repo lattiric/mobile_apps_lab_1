@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol SettingsDelegate: AnyObject {
+    func didChangeSettings(newText: String);
+}
+
 class SettingsViewController: UIViewController {
 
+    var delegate: SettingsDelegate?
+    
     @IBOutlet weak var ligthDarkMode: UISegmentedControl!
     
     lazy var lightDarkModel:LightDarkModel = {
@@ -33,13 +39,17 @@ class SettingsViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-//    @IBAction func setDark(_ sender: Any) {
+    @IBAction func setLight(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0{
+            view.backgroundColor = UIColor.gray
+        }else if sender.selectedSegmentIndex == 1{
+            view.backgroundColor = UIColor.white
+        }
 //        lightDarkModel.setLightOrDark(0);
-//    }
+    }
     
-//    @IBAction func setLight(_ sender: Any) {
-//        lightDarkModel.setLightOrDark(1);
-//    }
+//
+
     /*
     // MARK: - Navigation
 

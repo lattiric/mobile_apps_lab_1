@@ -164,24 +164,34 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6lI-4B-POV">
                                 <rect key="frame" x="172" y="298" width="49" height="31"/>
                             </switch>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNz-gA-RcG">
+                                <rect key="frame" x="159" y="430" width="75" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Start Timer"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fpR-Fi-N3x"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="fpR-Fi-N3x" firstAttribute="bottom" secondItem="KNz-gA-RcG" secondAttribute="bottom" constant="353" id="9G0-Zy-qnL"/>
                             <constraint firstItem="sFI-3o-4Qd" firstAttribute="top" secondItem="fpR-Fi-N3x" secondAttribute="top" constant="461" id="HKw-Io-Kux"/>
+                            <constraint firstItem="KNz-gA-RcG" firstAttribute="leading" secondItem="fpR-Fi-N3x" secondAttribute="leading" constant="159" id="Rw6-f1-jZd"/>
                             <constraint firstItem="sFI-3o-4Qd" firstAttribute="leading" secondItem="fpR-Fi-N3x" secondAttribute="leading" constant="139" id="VGj-dn-BUR"/>
                             <constraint firstItem="sFI-3o-4Qd" firstAttribute="firstBaseline" secondItem="6lI-4B-POV" secondAttribute="baseline" constant="8" symbolType="layoutAnchor" id="WCG-1A-kGx"/>
+                            <constraint firstItem="KNz-gA-RcG" firstAttribute="top" secondItem="fpR-Fi-N3x" secondAttribute="top" constant="327" id="bsb-iH-ddS"/>
                             <constraint firstItem="fpR-Fi-N3x" firstAttribute="bottom" secondItem="sFI-3o-4Qd" secondAttribute="bottom" constant="224" id="mqu-H8-QDG"/>
                             <constraint firstItem="6lI-4B-POV" firstAttribute="leading" secondItem="fpR-Fi-N3x" secondAttribute="leading" constant="172" id="pIQ-rt-39l"/>
                             <constraint firstItem="fpR-Fi-N3x" firstAttribute="trailing" secondItem="6lI-4B-POV" secondAttribute="trailing" constant="174" id="pkJ-hZ-EpQ"/>
                             <constraint firstItem="6lI-4B-POV" firstAttribute="top" secondItem="fpR-Fi-N3x" secondAttribute="top" constant="195" id="tZQ-Z1-bGq"/>
                             <constraint firstItem="fpR-Fi-N3x" firstAttribute="trailing" secondItem="sFI-3o-4Qd" secondAttribute="trailing" constant="140" id="try-bq-K1R"/>
+                            <constraint firstItem="fpR-Fi-N3x" firstAttribute="trailing" secondItem="KNz-gA-RcG" secondAttribute="trailing" constant="159" id="vy1-0u-x6S"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Efm-Fj-mDi"/>
                     <connections>
                         <outlet property="SwitchAction" destination="6lI-4B-POV" id="Nne-Hn-tfF"/>
                         <outlet property="slider" destination="sFI-3o-4Qd" id="dbt-LQ-cqR"/>
+                        <outlet property="timerBTN" destination="KNz-gA-RcG" id="3Ny-BT-IQW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JmP-hc-5vl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -427,6 +437,7 @@
                     <navigationItem key="navigationItem" id="bGj-bS-go0"/>
                     <connections>
                         <outlet property="logoView" destination="4gH-Qb-D7X" id="ffY-aa-9kf"/>
+                        <outlet property="settingsButton" destination="YRa-Xa-BXa" id="18s-OT-VAo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PjB-t3-OdA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -464,7 +475,6 @@
                                     <segment title="Light"/>
                                 </segments>
                                 <connections>
-                                    <action selector="setDark:" destination="xQB-nt-IRo" eventType="valueChanged" id="z9Y-Ml-Rba"/>
                                     <action selector="setLight:" destination="xQB-nt-IRo" eventType="valueChanged" id="lRR-tA-7NK"/>
                                 </connections>
                             </segmentedControl>
