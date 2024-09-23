@@ -12,13 +12,41 @@ class Page3ViewController: UIViewController {
     @IBOutlet weak var SwitchAction: UISwitch!
     
     @IBOutlet weak var slider: UISlider!
+    
+    @IBOutlet weak var timerBTN: UIButton!
+    var timer: Timer!
+    
     override func viewDidLoad() {
-            super.viewDidLoad()
+        
+        super.viewDidLoad()
+                
+        
+        
+            
+        timerBTN.addTarget(self, action: #selector(self.buttonClicked(_:)), for: UIControl.Event.touchUpInside)
+        
             SwitchAction.addTarget(self, action: #selector(self.valueChanged(_:)), for: UIControl.Event.valueChanged)
             
             slider.addTarget(self,action:#selector(self.sliderValueChanged(_:)),for:UIControl.Event.valueChanged)
             // Do any additional setup after loading the view.
+        
+       
+            
+        
         }
+    
+    @IBAction func buttonClicked(_ sender: Any){
+        print("BUTTON CLICKED")
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            if(self.view.backgroundColor != UIColor.green){
+                self.view.backgroundColor = UIColor.green
+            }else{
+                self.view.backgroundColor = UIColor.white
+            }
+            
+        }
+        timer.fire()
+    }
         
         @IBAction func valueChanged(_ sender: Any) {
             print("HERE!!!")
@@ -29,10 +57,12 @@ class Page3ViewController: UIViewController {
                 print("Switch is off")
                 self.view.backgroundColor = UIColor.black
             }
+            timer.invalidate()
             
         }
         
         @IBAction func sliderValueChanged(_ sender: Any) {
+            timer.invalidate()
             print("Slider value: \(slider.value)")
             if (slider.value > 0 && slider.value <= 0.1) {
                 self.view.backgroundColor = UIColor.white
@@ -58,6 +88,7 @@ class Page3ViewController: UIViewController {
             
         }
         
+    
 
         /*
         // MARK: - Navigation
@@ -68,5 +99,7 @@ class Page3ViewController: UIViewController {
             // Pass the selected object to the new view controller.
         }
         */
+    
+    
 
 }
