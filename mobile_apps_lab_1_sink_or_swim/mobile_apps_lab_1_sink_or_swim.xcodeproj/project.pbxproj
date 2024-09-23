@@ -12,6 +12,7 @@
 		586D80992C9D032E0003C9C9 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586D80982C9D032E0003C9C9 /* MovieTableViewCell.swift */; };
 		586D809B2C9D054B0003C9C9 /* MovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586D809A2C9D054B0003C9C9 /* MovieTableViewCell.xib */; };
 		588934D12CA0EB7900D63E17 /* LightDarkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 588934D02CA0EB7900D63E17 /* LightDarkModel.m */; };
+		589AA6662CA123E70035BE23 /* ModalSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589AA6652CA123E70035BE23 /* ModalSettingsViewController.swift */; };
 		58C5E2472C9BD3B500BFE0EF /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C5E2462C9BD3B500BFE0EF /* TableViewController.swift */; };
 		58C5E24B2C9BD89A00BFE0EF /* MovieModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C5E24A2C9BD89A00BFE0EF /* MovieModel.m */; };
 		58C5E24D2C9BE85200BFE0EF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C5E24C2C9BE85200BFE0EF /* MenuViewController.swift */; };
@@ -35,6 +36,7 @@
 		586D809A2C9D054B0003C9C9 /* MovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieTableViewCell.xib; sourceTree = "<group>"; };
 		588934CF2CA0EB7900D63E17 /* LightDarkModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LightDarkModel.h; sourceTree = "<group>"; };
 		588934D02CA0EB7900D63E17 /* LightDarkModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LightDarkModel.m; sourceTree = "<group>"; };
+		589AA6652CA123E70035BE23 /* ModalSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalSettingsViewController.swift; sourceTree = "<group>"; };
 		58C5E2462C9BD3B500BFE0EF /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		58C5E2482C9BD89A00BFE0EF /* mobile_apps_lab_1_sink_or_swim-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mobile_apps_lab_1_sink_or_swim-Bridging-Header.h"; sourceTree = "<group>"; };
 		58C5E2492C9BD89A00BFE0EF /* MovieModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieModel.h; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				58F927652C991CEB0048EF37 /* SceneDelegate.swift */,
 				58F927672C991CEB0048EF37 /* ViewController.swift */,
 				586D80942C9CF56A0003C9C9 /* SettingsViewController.swift */,
+				589AA6652CA123E70035BE23 /* ModalSettingsViewController.swift */,
 				58C5E24C2C9BE85200BFE0EF /* MenuViewController.swift */,
 				58C5E2462C9BD3B500BFE0EF /* TableViewController.swift */,
 				586D80962C9D00FF0003C9C9 /* SearchViewController.swift */,
@@ -189,6 +192,7 @@
 				588934D12CA0EB7900D63E17 /* LightDarkModel.m in Sources */,
 				58F927682C991CEB0048EF37 /* ViewController.swift in Sources */,
 				586D80972C9D00FF0003C9C9 /* SearchViewController.swift in Sources */,
+				589AA6662CA123E70035BE23 /* ModalSettingsViewController.swift in Sources */,
 				586D80992C9D032E0003C9C9 /* MovieTableViewCell.swift in Sources */,
 				EF38368B2CA0DE1C00EEDF78 /* MoviePosterCell.swift in Sources */,
 				58C5E24D2C9BE85200BFE0EF /* MenuViewController.swift in Sources */,

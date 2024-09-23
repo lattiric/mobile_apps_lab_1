@@ -7,17 +7,12 @@
 
 import UIKit
 
-protocol SettingsDelegate: AnyObject {
-    func didChangeSettings(newText: String);
-}
 
 //extension UIViewController: SettingsDelegate {
 //    
 //}
 
 class SettingsViewController: UIViewController {
-
-    var delegate: SettingsDelegate?
     
     @IBOutlet weak var ligthDarkMode: UISegmentedControl!
     
@@ -27,8 +22,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
         lazy var isLightOrDark = lightDarkModel.getLightOrDark();
         if(isLightOrDark == 0){
             view.backgroundColor = UIColor.gray
@@ -40,8 +34,6 @@ class SettingsViewController: UIViewController {
     
 
     @IBAction func closeSettings(_ sender: Any) {
-        print("reached test")
-        delegate?.didChangeSettings(newText: "Settings Again?")
         dismiss(animated: true, completion: nil)
     }
     

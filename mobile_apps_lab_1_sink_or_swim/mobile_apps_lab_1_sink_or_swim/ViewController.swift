@@ -9,10 +9,11 @@ import UIKit
 
 class ViewController: UIViewController{
     
-    @IBOutlet weak var settingsButton: UIButton!
+   
     @IBOutlet weak var logoView: UIImageView!
     
-
+    @IBOutlet weak var fakeSettings: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,23 +24,26 @@ class ViewController: UIViewController{
     }
 
     
-    
     @IBAction func enterApp(_ sender: Any) {
         
     }
     
-    @IBAction func enterSettings(_ sender: Any) {
-        let destinationVC = SettingsViewController()
+    @IBAction func enterModal(_ sender: Any) {
+        let destinationVC = ModalSettingsViewController()
         destinationVC.delegate = self
-//        present(destinationVC, animated: true, completion: nil)
+        present(destinationVC, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func enterSettings(_ sender: Any) {
     }
 }
 
 extension ViewController: SettingsDelegate {
     func didChangeSettings(newText: String){
 //        settingsButton.setTitle(newText, for: .normal)
-        print("reached")
-        settingsButton.setTitle("Testing", for: .normal)
+//        print("reached")
+        fakeSettings.setTitle("Testing", for: .normal)
 
     }
 }
